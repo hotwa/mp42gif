@@ -377,12 +377,12 @@ if ERRCATCH == 0:
                                     if count > (len(fsitem.split('/')) - 4):
                                         VIDPATH.append(i)
                                     count = count + 1
-
+                        
                                 VIDDIR = '/'.join(VIDPATH)
                                 print(Fore.RED + "    Deleting: ", end='')
                                 print(Fore.YELLOW + "./" + VIDDIR)
                                 os.remove(fsitem)
-                            else:
+                            elif os.path.isdir(fsitem):
                                 VIDPATH = []
                                 count = 0
                                 for i in fsitem.split('/'):
@@ -394,6 +394,9 @@ if ERRCATCH == 0:
                                 print(Fore.RED + "    Deleting: ", end='')
                                 print(Fore.YELLOW + "./" + VIDDIR + '/')
                                 shutil.rmtree(fsitem)
+                            else:
+                                print(Fore.RED + "    Path not found: ", end='')
+                                print(Fore.YELLOW + fsitem)
                     else:
                         print(Fore.RED + "GIF creation failed!`n")
                 else:
